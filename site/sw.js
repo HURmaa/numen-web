@@ -1,5 +1,5 @@
 /* Офлайн-режим веб-версии: всё приложение хранится в кэше браузера. */
-const VERSION = 'numen-v4';
+const VERSION = 'numen-v5';
 const FILES = ['./', 'index.html', 'theory.js', 'manifest.webmanifest',
   'fonts/Unbounded.ttf', 'fonts/GolosText.ttf',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/icon-maskable-512.png'];
