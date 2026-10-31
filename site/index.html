@@ -864,11 +864,11 @@ function settingsHTML(){
     <h3>Звук</h3>
     ${set('taps','Звук нажатий','Мягкий щелчок при нажатии кнопок и вкладок')}
     ${set('sound','Звуки ответов','Сигналы верно и неверно')}
-    ${set('events','Звуки событий','Барабаны в конце блока, буря на новом уровне, рокот червя в конце тренировки')}
+    ${set('events','Звуки событий','Барабаны в конце блока, буря на новом уровне, подземный гул песков в конце тренировки')}
     ${set('ambient','Ветер пустыни','Тихий фон, во время блока приглушается')}
     <label class="setnote" for="ambvol">Громкость ветра</label>
     <input class="range" id="ambvol" type="range" min="0" max="1" step="0.05" value="${st.ambVol}">
-    <div class="chips" style="margin-top:6px"><span class="muted small">Послушать:</span><button class="pill" data-hear="block">Конец блока</button><button class="pill" data-hear="level">Уровень</button><button class="pill" data-hear="worm">Червь</button></div>
+    <div class="chips" style="margin-top:6px"><span class="muted small">Послушать:</span><button class="pill" data-hear="block">Конец блока</button><button class="pill" data-hear="level">Уровень</button><button class="pill" data-hear="quake">Гул песков</button></div>
     <h3>Напоминание</h3>
     ${hasNative('setReminder')?'':`<p class="setnote">Напоминания по расписанию пока работают только в Android-версии: веб-приложения на iPhone не умеют присылать уведомления без сервера.</p>`}
     ${!hasNative('setReminder')?'':`<button class="toggle" role="switch" aria-checked="${!!st.remind}" data-set="remind"><span>Напоминать о тренировке<br><span class="muted small">Одно уведомление в день, только если ты ещё не занимался. Если серия под угрозой, предупрежу.</span></span><span class="sw"></span></button>
@@ -926,7 +926,7 @@ function whoosh(a,t,v){
   bp.frequency.setValueAtTime(250,t); bp.frequency.exponentialRampToValueAtTime(2200,t+.8); bp.frequency.exponentialRampToValueAtTime(350,t+1.9);
   env(g,t,.5,v,.4,1); n.connect(bp); bp.connect(g); g.connect(a.destination); n.start(t); n.stop(t+2.2);
 }
-function worm(a,t){
+function quake(a,t){
   const n=noiseSrc(a),lp=a.createBiquadFilter(),g=a.createGain(); lp.type='lowpass'; lp.frequency.setValueAtTime(60,t); lp.frequency.linearRampToValueAtTime(180,t+2.2); lp.frequency.linearRampToValueAtTime(70,t+4);
   env(g,t,2.2,.9,.4,1.6);
   const trem=a.createOscillator(),tg=a.createGain(); trem.frequency.value=7; tg.gain.value=.35; trem.connect(tg); tg.connect(g.gain);
@@ -940,7 +940,7 @@ function eventSound(name){
   if(name==='block'){ drum(a,t,58,.6); drum(a,t+.42,58,.45); drum(a,t+.84,52,.7); drone(a,t+.8,2.8,[55,82.5],.09); }
   if(name==='level'){ whoosh(a,t,.35); drone(a,t+.6,2.6,[73.4,110,146.8],.07); }
   if(name==='rank'){ [0,.38,.76,1.14,1.6].forEach((d,i)=>drum(a,t+d,i===4?44:58,i===4?.85:.5)); drone(a,t+1.5,3.6,[55,82.5,110],.1); }
-  if(name==='worm') worm(a,t);
+  if(name==='quake') quake(a,t);
 }
 /* фоновый ветер */
 let AMB=null;
@@ -970,7 +970,7 @@ function tapSound(kind){
   ng.gain.setValueAtTime(kind==='tab'?.12:.06,t); ng.gain.exponentialRampToValueAtTime(0.0001,t+.035);
   n.connect(bp); bp.connect(ng); ng.connect(a.destination); n.start(t); n.stop(t+.05);
 }
-function sfx(name,arg){ try{ if(['block','level','rank','worm'].includes(name)){ eventSound(name); if(name==='level'&&S.settings.sound) SFX.level(); return; } if(S.settings.sound) SFX[name](arg); }catch(e){} }
+function sfx(name,arg){ try{ if(['block','level','rank','quake'].includes(name)){ eventSound(name); if(name==='level'&&S.settings.sound) SFX.level(); return; } if(S.settings.sound) SFX[name](arg); }catch(e){} }
 function buzz(ms){ if(!S.settings.vibe) return; try{ if(window.MentatNative&&MentatNative.vibrate) MentatNative.vibrate(ms); else if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 
 /* ---------- графики ---------- */
@@ -1602,7 +1602,7 @@ function showSummary(){
     const sp=x.avgMs?`, ${sec1(x.avgMs)} с на ответ`:'';
     return `<li><div><b>${modOf(x.mod).name}</b><small>${ch}</small><button class="pill again" data-train="${x.mod}" data-sec="${x.sec}">Повторить блок</button></div><div class="rnum">${x.correct}/${x.total}<small>${x.total?Math.round(x.correct/x.total*100):0}%${sp}</small>${starsHTML(starsOf(x))}</div></li>`;}).join('');
   const done=r.length===run.queue.length;
-  if(r.length){ if(run.mode==='path'){ const g=done?starsOf({total:t,correct:c}):0; sfx(g>=1&&STAGES[run.stage].trial?'worm':g>=1?'block':'end'); } else sfx(done&&run.mode==='session'?'worm':'end'); }
+  if(r.length){ if(run.mode==='path'){ const g=done?starsOf({total:t,correct:c}):0; sfx(g>=1&&STAGES[run.stage].trial?'quake':g>=1?'block':'end'); } else sfx(done&&run.mode==='session'?'quake':'end'); }
 
   const bestCombo=Math.max(0,...r.map(x=>x.maxCombo||0));
   $('#view').innerHTML=`<div class="summary">
