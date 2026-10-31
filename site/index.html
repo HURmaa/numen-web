@@ -16,7 +16,7 @@
 <style>
 @font-face{font-family:"Unbounded";src:url("fonts/Unbounded.ttf") format("truetype");font-weight:200 900;font-display:swap}
 @font-face{font-family:"Golos Text";src:url("fonts/GolosText.ttf") format("truetype");font-weight:400 900;font-display:swap}
-/* Пустыня днём и ночью: песок и пряность, ночное небо с двумя лунами. Широкий гротеск для чисел и заголовков. */
+/* Пустыня днём и ночью: песок и охра, ночное небо с двумя лунами. Широкий гротеск для чисел и заголовков. */
 :root{
   --bg:#EADBC0; --surface:#F5EBD8; --raised:#FBF4E8; --ink:#2B1C10; --muted:#7B6249; --line:#D6C19D;
   --spice:#C25A12; --spice-ink:#FFF6EA; --spice-deep:#8A3E0A; --blue:#2F55B8; --good:#2E7D4F; --bad:#B8321E;
@@ -785,13 +785,13 @@ const starsHTML=(n,big)=>`<span class="stars ${big?'big':''}" aria-label="${n} �
 
 /* ---------- оформление ---------- */
 const ACCENTS={
-  spice:{name:'Пряность',light:['#C25A12','#8A3E0A','#FFF6EA'],dark:['#EE8A3C','#A4561C','#1A1008']},
+  spice:{name:'Охра',light:['#C25A12','#8A3E0A','#FFF6EA'],dark:['#EE8A3C','#A4561C','#1A1008']},
   water:{name:'Вода',light:['#2F55B8','#1E3A82','#F3F6FF'],dark:['#86A6FF','#4A63B5','#0E1428']},
   oasis:{name:'Оазис',light:['#1F7A63','#145444','#EFFBF6'],dark:['#56CDAE','#2E8A72','#08201A']},
   dusk:{name:'Закат',light:['#B23A55','#7C2639','#FFF1F4'],dark:['#F08AA0','#B0536A','#2A0D15']}
 };
 const BARS={light:['#EADBC0','#F5EBD8'],dark:['#14101C','#1E1729']};
-/* полные палитры: фон, карточки, текст и пейзаж шапки; у «Пряности» значения берутся из CSS */
+/* полные палитры: фон, карточки, текст и пейзаж шапки; у «Охры» значения берутся из CSS */
 const PALETTES={
   water:{
     light:{bg:'#DCE6EE',surface:'#EEF3F7',raised:'#F7FAFC',ink:'#14202E',muted:'#56687A',line:'#C3D1DD','key-press':'#D5E1EA',sky1:'#D6E8F5',sky2:'#AECDE6',moon:'#FFFFFF',dune1:'#93B6D3',dune2:'#7099C0',dune3:'#4F78A3',ripple:'#BCD5EA'},
