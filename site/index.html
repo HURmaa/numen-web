@@ -352,7 +352,7 @@ body.big .q.small{font-size:21px}
 }
 @keyframes drift{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(90deg);opacity:0}}
 @keyframes sweep{0%{-webkit-mask-position:100% 0;mask-position:100% 0;transform:none}100%{-webkit-mask-position:0 0;mask-position:0 0;transform:translateX(14px)}}
-@keyframes sandin{0%{opacity:0;filter:blur(7px);transform:translateY(12px);letter-spacing:.14em}100%{opacity:1;filter:none;transform:none;letter-spacing:normal}}
+@keyframes sandin{0%{opacity:0;transform:translateY(12px);letter-spacing:.14em}100%{opacity:1;transform:none;letter-spacing:normal}}
 
 /* живое небо */
 @media (prefers-reduced-motion: no-preference){
@@ -456,6 +456,8 @@ body.big .q.small{font-size:21px}
 /* приветствие */
 .welcome{position:fixed;inset:0;z-index:80;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 .welcome .art.hero{margin:0}
+body.welcoming .app,body.welcoming .tabs{visibility:hidden}
+.welcome{bottom:calc(-1 * env(safe-area-inset-bottom,0px))}
 .welcome .art{position:relative;height:38vh;min-height:220px;flex:none}
 .welcome .art svg{position:absolute;inset:0;width:100%;height:100%}
 .welcome .body{flex:1;padding:22px 22px 0;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
@@ -1760,7 +1762,7 @@ const WSLIDES=[
 ];
 let wIdx=0;
 function showWelcome(){
-  wIdx=0; let d=$('#welcome'); if(!d){ d=document.createElement('div'); d.id='welcome'; d.className='welcome'; document.body.appendChild(d); }
+  wIdx=0; document.body.classList.add('welcoming'); let d=$('#welcome'); if(!d){ d=document.createElement('div'); d.id='welcome'; d.className='welcome'; document.body.appendChild(d); }
   drawWelcome();
 }
 function drawWelcome(){
@@ -1772,7 +1774,7 @@ function drawWelcome(){
             :`<button class="primary" data-w="next">Дальше</button><button class="ghost" data-w="done">Пропустить</button>`}</div>`;
 }
 function endWelcome(go){
-  const d=$('#welcome'); if(d) d.remove();
+  const d=$('#welcome'); if(d) d.remove(); document.body.classList.remove('welcoming');
   S.onboarded=true; save();
   if(go==='tour'){ tab='home'; render(); setTimeout(startTour,250); }
   else { tab='path'; render(); }
