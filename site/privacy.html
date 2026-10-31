@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Нумен: политика конфиденциальности</title>
+<style>
+@font-face{font-family:"Golos Text";src:url("fonts/GolosText.ttf") format("truetype");font-weight:400 900}
+@font-face{font-family:"Unbounded";src:url("fonts/Unbounded.ttf") format("truetype");font-weight:200 900}
+:root{--bg:#EADBC0;--surface:#F5EBD8;--ink:#2B1C10;--muted:#7B6249;--line:#D6C19D;--accent:#C25A12}
+@media (prefers-color-scheme: dark){:root{--bg:#14101C;--surface:#1E1729;--ink:#F2E5CD;--muted:#A8957E;--line:#362C44;--accent:#EE8A3C}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,sans-serif;line-height:1.6;font-size:16px}
+main{max-width:720px;margin:0 auto;padding:32px max(18px,env(safe-area-inset-left)) 48px}
+h1{font-family:"Unbounded",sans-serif;font-weight:500;font-size:28px;line-height:1.2;margin:0 0 6px}
+h2{font-family:"Unbounded",sans-serif;font-weight:500;font-size:18px;margin:28px 0 8px}
+p,li{max-width:64ch}
+.muted{color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:16px 0}
+a{color:var(--accent)}
+td{padding:6px 10px 6px 0;vertical-align:top;border-bottom:1px solid var(--line)}
+table{border-collapse:collapse;margin:8px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Политика конфиденциальности</h1>
+<p class="muted">Приложение «Нумен» (Numen) для Android и веб-версия. Действует с 31 октября 2026 года.</p>
+
+<div class="card"><b>Коротко:</b> Нумен не собирает, не отправляет и не продаёт никаких данных. Всё, что ты делаешь в приложении, хранится только на твоём устройстве.</div>
+
+<h2>Какие данные хранит приложение</h2>
+<p>Чтобы показывать прогресс, приложение сохраняет на устройстве:</p>
+<ul>
+<li>уровни навыков, результаты тренировок, звёзды пути и вызова дня, серию дней;</li>
+<li>настройки: тему, палитру, звуки, время напоминания.</li>
+</ul>
+<p>Эти данные не покидают устройство. Приложение не требует регистрации, не запрашивает имя, почту, телефон, местоположение, контакты или фотографии и не содержит рекламы и сторонней аналитики.</p>
+
+<h2>Интернет</h2>
+<p>Android-версия работает без интернета и не отправляет запросов в сеть. Веб-версия загружается с GitHub Pages; при открытии сайта GitHub, как любой веб-хостинг, получает технические данные запроса, например IP-адрес. Подробнее в <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">заявлении GitHub о конфиденциальности</a>.</p>
+
+<h2>Разрешения Android</h2>
+<table>
+<tr><td>Уведомления</td><td>Только для ежедневного напоминания о тренировке, если ты его включил. Напоминание формируется на устройстве.</td></tr>
+<tr><td>Запуск после перезагрузки</td><td>Чтобы напоминание и виджет продолжали работать после перезагрузки телефона.</td></tr>
+<tr><td>Вибрация</td><td>Короткий отклик при ответах и нажатиях. Отключается в настройках.</td></tr>
+</table>
+
+<h2>Резервная копия</h2>
+<p>Если ты сохраняешь прогресс в файл, файл создаётся там, где ты сам выбрал: в памяти телефона, облаке или мессенджере. Приложение не имеет доступа к другим твоим файлам и читает только тот файл, который ты выбрал для загрузки.</p>
+
+<h2>Удаление данных</h2>
+<p>Чтобы удалить все данные, нажми «Сбросить весь прогресс» в настройках или удали приложение. В веб-версии можно также очистить данные сайта в настройках браузера.</p>
+
+<h2>Дети</h2>
+<p>Приложение подходит для любого возраста и ни у кого не собирает персональных данных, в том числе у детей.</p>
+
+<h2>Изменения и связь</h2>
+<p>Если политика изменится, новая версия появится на этой странице с новой датой. Вопросы можно задать через <a href="https://github.com/HURmaa/numen-web/issues">страницу проекта на GitHub</a> или по адресу, указанному в карточке приложения в RuStore.</p>
+</main>
+</body>
+</html>
