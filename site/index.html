@@ -459,7 +459,7 @@ body.big .q.small{font-size:21px}
 body.welcoming .app,body.welcoming .tabs{visibility:hidden}
 .welcome{bottom:calc(-1 * env(safe-area-inset-bottom,0px))}
 .welcome .art{position:relative;height:38vh;min-height:220px;flex:none}
-.welcome .art svg{position:absolute;inset:0;width:100%;height:100%}
+.welcome .art svg.land{position:absolute;inset:0;width:100%;height:100%}
 .welcome .body{flex:1;padding:22px 22px 0;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 .welcome h1{font-size:27px}
 .welcome p{color:var(--muted);line-height:1.55;font-size:16px}
@@ -499,6 +499,147 @@ body.welcoming .app,body.welcoming .tabs{visibility:hidden}
 .pausebox h1{font-size:34px}
 .pausebox .primary{max-width:360px;margin:14px auto 0}
 body.paused .hg .hgflow{animation-play-state:paused}
+
+/* сцены палитр: движение */
+.hero .moons .gl,.hero .sun .gl{opacity:.55}
+@media (prefers-reduced-motion: no-preference){
+  .hero .wv2{animation:wv2 6s linear infinite}
+  .hero .wv3{animation:wv3 8s linear infinite}
+  .hero .boat{animation:bob 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+  .hero .gulls{animation:gull 14s ease-in-out infinite alternate}
+  .hero .gl{animation:twinkle 1.6s ease-in-out infinite alternate}
+  .hero .gl:nth-child(2n){animation-delay:.7s}
+  .hero .sway{animation:sway 4.2s ease-in-out infinite alternate}
+  .hero .sw2{animation-duration:3.6s;animation-delay:-1s}.hero .sw3{animation-duration:4.8s;animation-delay:-2s}
+  .hero .ff{animation:ff 3s ease-in-out infinite alternate}
+  .hero .ff.f1{animation-delay:-1s;animation-duration:3.8s}.hero .ff.f2{animation-delay:-2s;animation-duration:2.6s}
+  .hero .flock{animation:flock 26s linear infinite}
+  .hero .rip{animation:ripx 4s ease-in-out infinite alternate}
+  .hero .rip.r2{animation-delay:-2s}
+}
+@keyframes wv2{to{transform:translateX(-34px)}}
+@keyframes wv3{to{transform:translateX(-44px)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(2.5px) rotate(2deg)}}
+@keyframes gull{from{transform:translate(0,0)}to{transform:translate(60px,-8px)}}
+@keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@keyframes ff{0%{opacity:.15;transform:translate(0,0)}100%{opacity:1;transform:translate(6px,-8px)}}
+@keyframes flock{0%{transform:translateX(-140px)}100%{transform:translateX(520px)}}
+
+/* частицы по палитре */
+body[data-th=water] .sgrain{border-radius:50%;background:var(--moon);opacity:.9}
+body[data-th=water] .sgrain.sp{background:var(--spice)}
+body[data-th=water] .grain{border-radius:50%;background:var(--moon);box-shadow:0 0 0 1px var(--spice)}
+body[data-th=oasis] .sgrain{border-radius:70% 0;background:var(--good);transform-origin:center}
+body[data-th=oasis] .sgrain.sp{background:var(--spice)}
+body[data-th=oasis] .grain{border-radius:70% 0;width:9px;height:6px}
+body[data-th=dusk] .sgrain{border-radius:50%;background:#FFD9A0;box-shadow:0 0 6px 1px var(--spice)}
+body[data-th=dusk] .sgrain.sp{background:var(--spice)}
+body[data-th=dusk] .grain{box-shadow:0 0 8px 2px var(--spice)}
+@media (prefers-reduced-motion: no-preference){
+  body[data-th=oasis] .sgrain{animation:leaf .9s cubic-bezier(.3,.1,.4,1) both}
+}
+@keyframes leaf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
+
+/* анимированные разборы */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 14px 10px;margin:8px 0 6px;overflow:hidden}
+.dstage{min-height:225px;display:grid;place-items:center;text-align:center;cursor:pointer}
+.demo.compact .dstage{min-height:215px}
+.dframe{display:flex;flex-direction:column;align-items:center;gap:10px}
+@media (prefers-reduced-motion: no-preference){ .dframe{animation:sandin .45s ease-out both} }
+.dq{font-family:var(--display);font-weight:500;font-size:clamp(24px,7.4vw,34px);line-height:1.25;font-variant-numeric:tabular-nums}
+.dq.big{font-size:clamp(34px,11vw,52px)}
+.dr{font-family:var(--display);font-size:clamp(18px,5.4vw,24px);color:var(--muted);font-variant-numeric:tabular-nums}
+.demo .h1{background:var(--spice);color:var(--spice-ink);border-radius:8px;padding:0 6px;font-weight:600}
+.demo .h2{color:var(--good);font-weight:700}
+.dnote{text-align:center;font-weight:600;min-height:22px;margin-top:6px}
+.dctl{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.ddots{display:flex;gap:4px}
+.ddots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .3s}
+.ddots i.on{background:var(--spice)}
+.dbtn{color:var(--muted);font-size:14px;padding:6px 4px}
+.cols{display:flex;gap:18px;font-family:var(--display);font-size:clamp(30px,9vw,42px)}
+.cols div{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:44px}
+.cols small{font-family:var(--body);font-size:12px;color:var(--muted);min-height:16px}
+.cols .ghost{color:var(--line)}
+.mg{position:relative;display:grid;grid-template-columns:auto;justify-items:center;font-family:var(--display);font-size:clamp(34px,10vw,46px);line-height:1.1}
+.mg>div{display:flex;gap:14px}
+.mg .x{font-size:20px;color:var(--muted)}
+.mg span{padding:0 6px;border-radius:10px;transition:background .3s,color .3s}
+.mg span.on{background:var(--spice);color:var(--spice-ink)}
+.mgx{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.mgx line{stroke:var(--spice);stroke-width:3;vector-effect:non-scaling-stroke;stroke-dasharray:4 4;opacity:.8}
+.wheelbox{display:flex;flex-direction:column;align-items:center;gap:6px}
+.wheel{width:170px;height:170px}
+.wheel .wr{fill:none;stroke:var(--line);stroke-width:2}
+.wheel .wd{fill:var(--raised);stroke:var(--line);stroke-width:1.5;transition:fill .3s}
+.wheel .wd.on{fill:var(--spice);stroke:var(--spice)}
+.wheel .wt{font-family:var(--body);font-size:11px;font-weight:600;text-anchor:middle;fill:var(--ink);pointer-events:none}
+.wheel .hand{transform-origin:80px 80px}
+.wheel .hand line{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.wheel .hand circle{fill:var(--ink)}
+.wsub{font-weight:600;color:var(--muted)}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chiprow span{font-family:var(--display);padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--raised)}
+.chiprow span.on{background:var(--spice);color:var(--spice-ink);border-color:var(--spice)}
+.flashd{font-family:var(--display);font-size:72px;color:var(--spice);line-height:1}
+.emo{font-size:46px;line-height:1}
+.emo4{font-size:34px;letter-spacing:.08em}
+.emo4 .pk{outline:3px solid var(--good);border-radius:10px}
+.rooms{display:flex;gap:12px}
+.rooms div{display:flex;flex-direction:column;align-items:center;background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:8px 10px;font-size:26px}
+.rooms small{font-size:12px;color:var(--muted)}
+.rooms b{font-size:30px}
+.short{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;padding:0}
+.short li{counter-increment:s;display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:500}
+.short li::before{content:counter(s);flex:none;width:24px;height:24px;border-radius:7px;background:var(--spice);color:var(--spice-ink);display:grid;place-items:center;font-family:var(--display);font-size:13px}
+.interlude .short{margin:2px 0 4px}
+.interlude .demo{margin:4px 0}
+details.more{margin-top:14px;border-top:1px solid var(--line);padding-top:8px}
+details.more summary{cursor:pointer;font-weight:600;color:var(--spice);padding:8px 0;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:" ▾"}
+details.more[open] summary::after{content:" ▴"}
+
+/* приветствие: живые картинки */
+.welcome .art{position:relative}
+.wanim{position:absolute;inset:0;display:grid;place-items:center;padding-top:env(safe-area-inset-top,0px)}
+.wcard{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:18px 26px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.18);min-width:190px}
+.wq{font-family:var(--display);font-size:34px}
+.wa{font-family:var(--display);font-size:32px;color:var(--good);border-bottom:3px solid var(--good);min-height:44px;margin-top:4px}
+.wa span{opacity:0}
+.wok{font-family:var(--display);font-weight:600;color:var(--good);margin-top:6px;opacity:0}
+.wcard i{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:var(--spice);opacity:0}
+.wpath{display:flex;gap:16px;align-items:flex-end}
+.wn{display:flex;flex-direction:column;align-items:center;gap:4px;transform:translateY(calc(var(--i) * -10px))}
+.wn b{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line);font-family:var(--display);color:var(--muted)}
+.wn span{color:var(--spice);font-size:13px;letter-spacing:2px;opacity:0}
+.wweek{display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
+.wweek div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+.wweek i{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;background:var(--raised)}
+.wweek i svg{width:14px;height:14px;fill:var(--spice-ink);opacity:0}
+.wstreak{position:absolute;bottom:18%;font-family:var(--display);font-weight:600;background:var(--surface);border-radius:999px;padding:6px 14px}
+.wnum::after{content:"0";animation:wnum 6s steps(1) infinite}
+@keyframes wnum{0%{content:"0"}14%{content:"1"}24%{content:"2"}34%{content:"3"}44%{content:"4"}54%{content:"5"}64%{content:"6"}74%{content:"7"}}
+@media (prefers-reduced-motion: no-preference){
+  .wa span{animation:wtype 4s infinite}
+  .wa span:nth-child(2){animation-delay:.25s}.wa span:nth-child(3){animation-delay:.5s}
+  .wok{animation:wok 4s infinite}
+  .wq,.wa{animation:wblow 4s infinite}
+  .wcard i{animation:wgrain 4s infinite}
+  .wn b{animation:wnode 5s infinite;animation-delay:calc(var(--i) * .7s)}
+  .wn span{animation:wstar 5s infinite;animation-delay:calc(var(--i) * .7s + .3s)}
+  .wweek i{animation:wday 6s infinite;animation-delay:calc(var(--i) * .6s)}
+  .wweek i svg{animation:wdrop 6s infinite;animation-delay:calc(var(--i) * .6s)}
+}
+@keyframes wtype{0%,8%{opacity:0}12%,100%{opacity:1}}
+@keyframes wok{0%,30%{opacity:0;transform:scale(.6)}36%,62%{opacity:1;transform:none}70%,100%{opacity:0}}
+@keyframes wblow{0%,60%{opacity:1;transform:none;filter:none}78%,92%{opacity:0;transform:translateX(40px)}100%{opacity:1;transform:none}}
+@keyframes wgrain{0%,60%{opacity:0;transform:translate(-50%,-50%)}62%{opacity:1}85%,100%{opacity:0;transform:translate(calc(-50% + 90px),calc(-50% - 20px))}}
+@keyframes wnode{0%,10%{background:var(--surface);color:var(--muted);border-color:var(--line)}16%,90%{background:var(--spice);color:var(--spice-ink);border-color:var(--spice-deep)}100%{background:var(--surface);color:var(--muted);border-color:var(--line)}}
+@keyframes wstar{0%,10%{opacity:0;transform:scale(.4)}18%,90%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes wday{0%,6%{background:var(--raised);border-color:var(--line)}10%,88%{background:var(--spice);border-color:var(--spice)}100%{background:var(--raised);border-color:var(--line)}}
+@keyframes wdrop{0%,6%{opacity:0}10%,88%{opacity:1}100%{opacity:0}}
+.tour .tstep{float:right;width:30px;height:30px;border-radius:50%;background:var(--spice);color:var(--spice-ink);display:grid;place-items:center;font-family:var(--display);font-weight:600}
 </style>
 </head>
 <body>
@@ -662,7 +803,9 @@ function articleHTML(id){
       <div class="chips"><span class="muted small">Тренировать:</span>${[60,120,300].map(s=>`<button class="pill" data-train="${id}" data-sec="${s}">${s/60} мин</button>`).join('')}</div>
       ${mini?`<div style="margin-top:14px">${mini}</div><p class="muted small">Точность в последних ${recs.length} ${plural(recs.length,['блоке','блоках','блоках'])}</p>`:''}
     </div>
-    <div class="theory">${a.html}</div>
+    ${DEMOS[id]?`<h3>Как решать</h3>${demoHTML(id)}`:''}
+    <h3>Коротко</h3>${shortHTML(id)}
+    <details class="more"><summary>Подробная методика с примерами</summary><div class="theory">${a.html}</div></details>
     <div class="chips" style="margin:18px 0 6px"><span class="muted small">Тренировать:</span>${[60,120,300].map(s=>`<button class="pill" data-train="${id}" data-sec="${s}">${s/60} мин</button>`).join('')}</div></div>`;
   }
   const train=id!=='basics'?`<div class="chips"><span class="muted small">Тренировать:</span>${[60,120,300].map(s=>`<button class="pill" data-train="${id}" data-sec="${s}">${s/60} мин</button>`).join('')}</div>`:'';
@@ -694,14 +837,6 @@ const curStage=()=>{ for(let i=0;i<STAGES.length;i++) if(pStars(i)<1) return i; 
 const CH_DUNE=[['#DDB27A','#CC9257'],['#D8A06A','#C2834A'],['#CF915E','#B57040'],['#C28058','#A0603A'],['#9E6650','#7D4C3A'],['#5A3E52','#3E2B3C'],['#3E3050','#2A2036'],['#2F2438','#1F1727']];
 const CH_SKY=[['#F4DDB0','#EBC48A'],['#F2C9A0','#E9B07A'],['#EBB98C','#DD9A62'],['#E0A57E','#C98656'],['#C98A6A','#A9694C'],['#6F5373','#4A3650'],['#4A3A63','#2E2340'],['#2B2244','#191325']];
 const LOCK='<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
-function chapterArt(c){
-  const [a,b]=CH_SKY[c];
-  return `<svg viewBox="0 0 400 112" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="ch${c}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
-    <rect width="400" height="112" fill="url(#ch${c})"/>
-    ${c>=5?`<circle cx="330" cy="34" r="14" fill="#F2E5CD" opacity=".9"/><circle cx="356" cy="52" r="5" fill="#F2E5CD" opacity=".7"/>`:`<circle cx="330" cy="${40+c*8}" r="18" fill="#FFF3DF" opacity=".9"/>`}
-    <path fill="${CH_DUNE[c][0]}" d="M0 82 C70 ${62-c*2} 140 70 210 78 S330 ${60+c} 400 70 V112 H0Z"/>
-    <path fill="${CH_DUNE[c][1]}" d="M0 98 C90 86 170 88 240 94 S350 86 400 92 V112 H0Z"/></svg>`;
-}
 const ZIG=[0,46,70,46,0,-46,-70,-46];
 function pathHTML(){
   const done=STAGES.filter(st=>pStars(st.idx)>=1).length, stars=STAGES.reduce((s,st)=>s+pStars(st.idx),0), cur=curStage();
@@ -710,7 +845,7 @@ function pathHTML(){
     <p class="muted small">Пройдено ${done} из ${STAGES.length} ступеней, звёзд ${stars} из ${STAGES.length*3}</p></div>`;
   CHAPTERS.forEach((ch,c)=>{
     const st0=STAGES.filter(x=>x.chapter===c), open=unlocked(st0[0].idx);
-    out+=`<section class="chapter ${open?'':'lock'}">${chapterArt(c)}<div class="ct" style="color:${c>=5?'#F2E5CD':'#2B1C10'}"><span style="color:inherit;opacity:.75">Глава ${c+1}</span><b>${ch}</b></div></section><div class="trail">`;
+    out+=`<section class="chapter ${open?'':'lock'}">${chapterArt(c)}<div class="ct" style="color:${chapterInk(c)}"><span style="color:inherit;opacity:.75">Глава ${c+1}</span><b>${ch}</b></div></section><div class="trail">`;
     st0.forEach((st,k)=>{
       const p=pStars(st.idx), un=unlocked(st.idx), isCur=st.idx===cur&&p<1;
       const cls=p>=1?'done':isCur?'cur':un?'':'locked';
@@ -846,7 +981,7 @@ function applyLook(){
   const pal=PALETTES[st.accent]&&PALETTES[st.accent][dark?'dark':'light'];
   PALKEYS.forEach(k=>{ if(pal&&pal[k]) r.style.setProperty('--'+k,pal[k]); else r.style.removeProperty('--'+k); });
   if(pal) r.style.setProperty('--key',pal.raised); else r.style.removeProperty('--key');
-  document.body.classList.toggle('big',!!st.big);
+  document.body.classList.toggle('big',!!st.big); document.body.dataset.th=st.accent||'spice';
   if(S.blocks) setTimeout(()=>{ try{ syncNative(); }catch(e){} },50);
   try{ if(window.MentatNative&&MentatNative.setBars){ const b=pal?[pal.bg,pal.surface]:BARS[dark?'dark':'light']; MentatNative.setBars(dark,b[0],b[1]); } }catch(e){}
 }
@@ -870,6 +1005,7 @@ function settingsHTML(){
     <div class="seg seg4">${tbtn('light',ICON_SUN,'День')}${tbtn('dark',ICON_MOON,'Ночь')}${tbtn('clock',ICON_CLOCK,'По часам')}${tbtn('auto',ICON_AUTO,'Как телефон')}</div>
     <p class="setnote">«По часам»: ночь с 20:30 до 6:30, остальное время день. Небо в шапке в любом режиме меняется со временем суток: рассвет, день, закат.</p>
     <h3>Палитра</h3>
+    <p class="setnote" style="margin-top:0">Палитра меняет пейзаж, частицы и звуки.</p>
     <div class="swatches">${sw}</div>
     <div class="preview"><div class="q">47 × 23</div><button class="primary" style="margin-top:12px" tabindex="-1">Так выглядят кнопки</button></div>
     <h3>Тренировка</h3>
@@ -879,11 +1015,11 @@ function settingsHTML(){
     <h3>Звук</h3>
     ${set('taps','Звук нажатий','Мягкий щелчок при нажатии кнопок и вкладок')}
     ${set('sound','Звуки ответов','Сигналы верно и неверно')}
-    ${set('events','Звуки событий','Барабаны в конце блока, буря на новом уровне, подземный гул песков в конце тренировки')}
-    ${set('ambient','Ветер пустыни','Тихий фон, во время блока приглушается')}
-    <label class="setnote" for="ambvol">Громкость ветра</label>
+    ${set('events','Звуки событий','Конец блока, новый уровень и финал тренировки — в звуках выбранной палитры')}
+    ${set('ambient','Звуки природы','Ветер пустыни, прибой, родник или вечерние сверчки — по палитре. Во время блока тише')}
+    <label class="setnote" for="ambvol">Громкость фона</label>
     <input class="range" id="ambvol" type="range" min="0" max="1" step="0.05" value="${st.ambVol}">
-    <div class="chips" style="margin-top:6px"><span class="muted small">Послушать:</span><button class="pill" data-hear="block">Конец блока</button><button class="pill" data-hear="level">Уровень</button><button class="pill" data-hear="quake">Гул песков</button></div>
+    <div class="chips" style="margin-top:6px"><span class="muted small">Послушать:</span><button class="pill" data-hear="block">Конец блока</button><button class="pill" data-hear="level">Уровень</button><button class="pill" data-hear="quake">${FINALE_NAME[THEME()]}</button></div>
     <h3>Напоминание</h3>
     ${hasNative('setReminder')?'':`<p class="setnote">Напоминания по расписанию пока работают только в Android-версии: веб-приложения на iPhone не умеют присылать уведомления без сервера.</p>`}
     ${!hasNative('setReminder')?'':`<button class="toggle" role="switch" aria-checked="${!!st.remind}" data-set="remind"><span>Напоминать о тренировке<br><span class="muted small">Одно уведомление в день, только если ты ещё не занимался. Если серия под угрозой, предупрежу.</span></span><span class="sw"></span></button>
@@ -911,8 +1047,8 @@ function tone(f,t0,d,type,g){
   o.connect(v); v.connect(a.destination); o.start(t); o.stop(t+d+0.03);
 }
 const SFX={
-  ok:c=>{ const k=Math.min(c||0,8)*20; tone(660+k,0,.12,'triangle',.11); tone(990+k,.075,.2,'triangle',.1); },
-  bad:()=>{ tone(196,0,.18,'square',.035); tone(147,.11,.28,'sine',.12); },
+  ok:c=>{ const a=audio(); if(a) tsnd().ok(a,a.currentTime+.005,c); },
+  bad:()=>{ const a=audio(); if(a) tsnd().bad(a,a.currentTime+.005); },
   level:()=>{ [523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.32,'triangle',.11)); },
   end:()=>{ [392,523,659].forEach((f,i)=>tone(f,i*.13,.3,'triangle',.1)); }
 };
@@ -954,41 +1090,300 @@ function quake(a,t){
 }
 function eventSound(name){
   if(!S.settings.events) return; const a=audio(); if(!a) return; const t=a.currentTime+.05;
-  if(name==='block'){ drum(a,t,58,.6); drum(a,t+.42,58,.45); drum(a,t+.84,52,.7); drone(a,t+.8,2.8,[55,82.5],.09); }
+  if(name==='block') themeBlock(a,t);
   if(name==='level'){ whoosh(a,t,.35); drone(a,t+.6,2.6,[73.4,110,146.8],.07); }
-  if(name==='rank'){ [0,.38,.76,1.14,1.6].forEach((d,i)=>drum(a,t+d,i===4?44:58,i===4?.85:.5)); drone(a,t+1.5,3.6,[55,82.5,110],.1); }
-  if(name==='quake') quake(a,t);
+  if(name==='rank'){ if(THEME()==='spice'){ [0,.38,.76,1.14,1.6].forEach((d,i)=>drum(a,t+d,i===4?44:58,i===4?.85:.5)); drone(a,t+1.5,3.6,[55,82.5,110],.1); } else { themeBlock(a,t); themeFinale(a,t+1.1); } }
+  if(name==='quake') themeFinale(a,t);
 }
 /* фоновый ветер */
 let AMB=null;
 function startAmbient(){
   if(AMB||!S.settings.ambient) return; const a=audio(); if(!a) return;
   const master=a.createGain(); master.gain.value=0.0001; master.connect(a.destination);
-  const n=noiseSrc(a),bp=a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=520; bp.Q.value=.8;
-  const l1=a.createOscillator(),l1g=a.createGain(); l1.frequency.value=.06; l1g.gain.value=320; l1.connect(l1g); l1g.connect(bp.frequency);
-  const wg=a.createGain(); wg.gain.value=.55; const l2=a.createOscillator(),l2g=a.createGain(); l2.frequency.value=.11; l2g.gain.value=.3; l2.connect(l2g); l2g.connect(wg.gain);
-  n.connect(bp); bp.connect(wg); wg.connect(master);
-  const n2=noiseSrc(a),lp=a.createBiquadFilter(),lg=a.createGain(); lp.type='lowpass'; lp.frequency.value=110; lg.gain.value=.5; n2.connect(lp); lp.connect(lg); lg.connect(master);
-  [n,n2,l1,l2].forEach(x=>x.start());
-  AMB={master,parts:[n,n2,l1,l2]}; setAmbientLevel(2.5);
+  AMB={master,parts:[],timers:[]}; const r=buildAmbient(a,master); AMB.parts=r.parts; AMB.timers=AMB.timers.concat(r.timers); setAmbientLevel(2.5);
 }
+function restartAmbient(){ if(!AMB) return; stopAmbient(); setTimeout(()=>{ if(S.settings.ambient) startAmbient(); },750); }
 function ambTarget(){ return S.settings.ambient?(S.settings.ambVol||0)*0.22*(run?.45:1):0.0001; }
 function setAmbientLevel(sec){ if(!AMB) return; const a=audio(), g=AMB.master.gain, t=a.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(Math.max(0.0001,g.value),t); g.linearRampToValueAtTime(Math.max(0.0001,ambTarget()),t+(sec||.6)); }
-function stopAmbient(){ if(!AMB) return; const x=AMB; AMB=null; const a=audio(),t=a.currentTime; x.master.gain.cancelScheduledValues(t); x.master.gain.setValueAtTime(x.master.gain.value,t); x.master.gain.linearRampToValueAtTime(0.0001,t+.6); setTimeout(()=>x.parts.forEach(p=>{try{p.stop();}catch(e){}}),800); }
+function stopAmbient(){ if(!AMB) return; const x=AMB; AMB=null; (x.timers||[]).forEach(clearTimeout); const a=audio(),t=a.currentTime; x.master.gain.cancelScheduledValues(t); x.master.gain.setValueAtTime(x.master.gain.value,t); x.master.gain.linearRampToValueAtTime(0.0001,t+.6); setTimeout(()=>x.parts.forEach(p=>{try{p.stop();}catch(e){}}),800); }
 document.addEventListener('visibilitychange',()=>{ if(!AC) return; if(document.hidden) AC.suspend(); else AC.resume(); });
 
 function tapSound(kind){
-  if(!S.settings.taps) return; const a=audio(); if(!a) return; const t=a.currentTime+.005;
-  const o=a.createOscillator(),g=a.createGain(); o.type='sine';
-  o.frequency.setValueAtTime(kind==='tab'?210:320,t); o.frequency.exponentialRampToValueAtTime(kind==='tab'?95:170,t+.07);
-  g.gain.setValueAtTime(kind==='tab'?.16:.07,t); g.gain.exponentialRampToValueAtTime(0.0001,t+.1);
-  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.12);
-  const n=noiseSrc(a),bp=a.createBiquadFilter(),ng=a.createGain(); bp.type='bandpass'; bp.frequency.value=kind==='tab'?1400:2600; bp.Q.value=1.4;
-  ng.gain.setValueAtTime(kind==='tab'?.12:.06,t); ng.gain.exponentialRampToValueAtTime(0.0001,t+.035);
-  n.connect(bp); bp.connect(ng); ng.connect(a.destination); n.start(t); n.stop(t+.05);
+  if(!S.settings.taps) return; const a=audio(); if(!a) return; try{ tsnd().tap(a,a.currentTime+.005,kind==='tab'); }catch(e){}
 }
 function sfx(name,arg){ try{ if(['block','level','rank','quake'].includes(name)){ eventSound(name); if(name==='level'&&S.settings.sound) SFX.level(); return; } if(S.settings.sound) SFX[name](arg); }catch(e){} }
 function buzz(ms){ if(!S.settings.vibe) return; try{ if(window.MentatNative&&MentatNative.vibrate) MentatNative.vibrate(ms); else if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+
+/* ---------- сцены палитр: пустыня, море, оазис, закат ---------- */
+const THEME=()=>S.settings.accent||'spice';
+const CSSC={sky1:'var(--sky1)',sky2:'var(--sky2)',f1:'var(--dune1)',f2:'var(--dune2)',f3:'var(--dune3)',lt:'var(--ripple)',moon:'var(--moon)',sun:'var(--sun-c,var(--moon))'};
+const OCHRE={light:{sky1:'#F4DDB0',sky2:'#EBC48A',dune1:'#DDB27A',dune2:'#CC9257',dune3:'#B5743F',ripple:'#E9C08A',moon:'#FFF8EA',ink:'#2B1C10'},
+             dark:{sky1:'#2B2244',sky2:'#191325',dune1:'#40303F',dune2:'#2F2233',dune3:'#211827',ripple:'#4A3848',moon:'#F2E5CD',ink:'#F2E5CD'}};
+const FINALE_NAME={spice:'Гул песков',water:'Прибой',oasis:'Родник',dusk:'Колокола'};
+function hx(h){ h=String(h).replace('#',''); return [0,2,4].map(i=>parseInt(h.substr(i,2),16)); }
+function mixc(a,b,t){ const A=hx(a),B=hx(b); return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join(''); }
+function wavePath(y,amp,len,x0,x1){ let d=`M${x0} 240 L${x0} ${y}`; for(let x=x0;x<x1;x+=len) d+=` Q${x+len/4} ${y-amp} ${x+len/2} ${y} T${x+len} ${y}`; return d+` L${x1} 240Z`; }
+function palm(x,y,h,s,col,lean,i){
+  const tx=x+lean, ty=y-h;
+  let g=`<path d="M${x} ${y} Q${x+lean*0.15} ${y-h*0.55} ${tx} ${ty}" fill="none" style="stroke:${col}" stroke-width="${(5*s).toFixed(1)}" stroke-linecap="round"/>`;
+  g+=`<g class="sway sw${i}" style="transform-origin:${tx}px ${ty}px">`;
+  [-165,-128,-92,-58,-22,12,-200].forEach((a,k)=>{ const L=(k%2?30:38)*s;
+    g+=`<path transform="translate(${tx} ${ty}) rotate(${a})" d="M0 0 Q${(L*0.5).toFixed(1)} ${(-L*0.34).toFixed(1)} ${L.toFixed(1)} ${(L*0.14).toFixed(1)} Q${(L*0.48).toFixed(1)} ${(-L*0.06).toFixed(1)} 0 0Z" style="fill:${col}"/>`; });
+  return g+`<circle cx="${tx}" cy="${ty+2*s}" r="${(3.2*s).toFixed(1)}" style="fill:${col}"/></g>`;
+}
+/* o.night: undefined — день и ночь переключает CSS (шапка); true/false — нарисовать только нужное (главы пути) */
+function scene(th,o){
+  const C=o.C, id=o.id, N=o.night, day=N!==true, nit=N!==false, sunY=o.sunY==null?100:o.sunY;
+  const dayCls=N===undefined?'class="sun"':'', nitCls=N===undefined?'class="moons"':'', starCls=N===undefined?'class="stars-sky"':'';
+  let g=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${C.sky1}"/><stop offset="1" style="stop-color:${C.sky2}"/></linearGradient>
+    <mask id="${id}m"><rect width="400" height="240" fill="#fff"/><circle cx="309" cy="64" r="17" fill="#000"/></mask><clipPath id="${id}c"><circle cx="210" cy="150" r="54"/></clipPath></defs>
+    <rect width="400" height="240" fill="url(#${id})"/>`;
+  if(nit){ g+=`<g ${starCls} style="fill:${C.moon}">${[[40,30,1.2],[96,58,1],[150,22,1.4],[214,48,1],[262,18,1.2],[190,96,.9],[120,112,1.1],[70,140,.9],[384,40,1],[236,132,.8],[18,96,1],[345,120,.9]].map(([x,y,r])=>`<circle class="tw" cx="${x}" cy="${y}" r="${r}"/>`).join('')}
+    <path class="shoot" d="M300 20 l14 -6" style="stroke:${C.moon}" stroke-width="1.4" stroke-linecap="round"/><path class="shoot s2" d="M200 30 l14 -6" style="stroke:${C.moon}" stroke-width="1.2" stroke-linecap="round"/></g>`; }
+  if(th==='dusk'){
+    if(day) g+=`<g ${dayCls}><circle class="glow" cx="210" cy="150" r="80" style="fill:${C.sun}" opacity=".25"/><circle cx="210" cy="150" r="54" style="fill:${C.sun}"/><g clip-path="url(#${id}c)">${[138,148,157,165].map((y,i)=>`<rect x="150" y="${y}" width="120" height="${2+i*1.6}" style="fill:${C.sky2}"/>`).join('')}</g></g>`;
+    if(nit) g+=`<g ${nitCls}><circle cx="300" cy="70" r="19" style="fill:${C.moon}" mask="url(#${id}m)"/></g>`;
+    g+=`<g class="flock" style="stroke:${C.f3}" fill="none" stroke-width="1.4" stroke-linecap="round">${[[150,52],[168,44],[182,56],[200,48],[164,64]].map(([x,y])=>`<path d="M${x} ${y} q4 -4 8 0 q4 -4 8 0"/>`).join('')}</g>
+    <g class="d1"><path style="fill:${C.f1}" d="M-10 160 L30 142 L72 158 L120 120 L165 150 L214 128 L262 152 L312 114 L360 146 L410 128 V240 H-10Z"/></g>
+    <g class="d2"><path style="fill:${C.f2}" d="M-10 184 L50 160 L105 180 L160 152 L220 178 L280 156 L340 182 L410 162 V240 H-10Z"/></g>
+    <g class="d3"><path style="fill:${C.f3}" d="M-10 208 C60 194 120 198 200 206 S330 198 410 204 V240 H-10Z"/></g>`;
+    return g;
+  }
+  if(day) g+=`<g ${dayCls}><g transform="translate(0 ${sunY-100})"><circle class="glow" cx="296" cy="100" r="46" style="fill:${C.sun}"/><circle cx="296" cy="100" r="30" style="fill:${C.sun}"/></g></g>`;
+  if(nit) g+= th==='spice'
+    ? `<g ${nitCls}><circle cx="326" cy="98" r="22" style="fill:${C.moon}" opacity=".92"/><circle cx="366" cy="128" r="8" style="fill:${C.moon}" opacity=".75"/></g>`
+    : `<g ${nitCls}><circle cx="326" cy="96" r="20" style="fill:${C.moon}" opacity=".92"/></g>`;
+  if(th==='water'){
+    g+=`<path style="fill:${C.f3}" opacity=".45" d="M14 158 C34 146 62 143 92 158Z"/>
+    <rect y="158" width="400" height="82" style="fill:${C.f1}"/>
+    ${day?`<g ${dayCls}><g class="glints" style="fill:${C.moon}">${[[296,166,26],[300,176,20],[292,186,16],[298,196,11]].map(([x,y,w])=>`<ellipse class="gl" cx="${x}" cy="${y}" rx="${w}" ry="1.6" opacity=".6"/>`).join('')}</g>
+      <g class="gulls" style="stroke:${C.f3}" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M190 62 q6 -6 12 0 q6 -6 12 0"/><path d="M222 50 q5 -5 10 0 q5 -5 10 0"/></g></g>`:''}
+    ${nit?`<g ${nitCls}><g class="glints" style="fill:${C.moon}">${[[326,166,22],[330,177,16],[322,188,12]].map(([x,y,w])=>`<ellipse class="gl" cx="${x}" cy="${y}" rx="${w}" ry="1.4" opacity=".55"/>`).join('')}</g></g>`:''}
+    <g class="boat"><path style="fill:${C.f3}" d="M104 168 L138 168 L131 175 L111 175Z"/><path d="M121 167 L121 136" style="stroke:${C.f3}" stroke-width="1.3"/><path style="fill:${C.moon}" opacity=".92" d="M122.5 138 L122.5 165 L138 165Z"/><path style="fill:${C.moon}" opacity=".75" d="M119.5 143 L119.5 165 L108 165Z"/></g>
+    <g class="d2"><path class="wv wv2" style="fill:${C.f2}" d="${wavePath(182,4,34,-68,470)}"/></g>
+    <g class="d3"><path class="wv wv3" style="fill:${C.f3}" d="${wavePath(206,5,44,-88,490)}"/></g>
+    <g class="foam" fill="none" style="stroke:${C.lt}" stroke-width="1.2" opacity=".7"><path d="M40 196c10-3 20-3 30 0"/><path d="M250 192c12-3 24-3 36 0"/><path d="M150 218c12-3 24-3 36 0"/></g>`;
+    return g;
+  }
+  if(th==='oasis'){
+    g+=`<g class="d1"><path style="fill:${C.f1}" d="M-20 168 C60 150 120 154 180 166 S300 146 420 160 V240 H-20Z"/></g>
+    <g class="d2"><path style="fill:${C.f2}" d="M0 196 C80 182 150 182 220 192 S340 184 400 190 V240 H0Z"/></g>
+    <ellipse cx="205" cy="212" rx="118" ry="15" style="fill:${C.sky1}" opacity=".95"/>
+    <g fill="none" style="stroke:${C.lt}" stroke-width="1.2" opacity=".8"><path class="rip" d="M150 211c16-3 32-3 48 0"/><path class="rip r2" d="M220 216c14-3 28-3 42 0"/></g>
+    ${palm(236,208,72,1,C.f3,-8,1)}${palm(270,210,48,.72,C.f3,6,2)}${palm(358,202,64,.9,C.f3,-10,3)}
+    <g style="stroke:${C.f3}" stroke-width="1.6" stroke-linecap="round">${[[30,226],[170,230],[290,226],[372,224]].map(([x,y])=>`<path d="M${x} ${y} l-3 -8 M${x} ${y} l0 -10 M${x} ${y} l3 -8"/>`).join('')}</g>
+    <g class="d3"><path style="fill:${C.f3}" d="M0 232 C90 224 170 226 240 230 S350 224 400 228 V240 H0Z"/></g>
+    ${nit?`<g ${nitCls} style="fill:${C.moon}">${[[60,150],[150,176],[250,160],[300,180],[360,150],[200,140]].map(([x,y],k)=>`<circle class="ff f${k%3}" cx="${x}" cy="${y}" r="1.6"/>`).join('')}</g>`:''}`;
+    return g;
+  }
+  /* охра: пустыня */
+  g+=`${day&&N===undefined?`<g class="mirage-w"><ellipse class="mirage" cx="200" cy="160" rx="230" ry="7" style="fill:${C.sky2}"/></g>`:''}
+  <g class="drift d1"><path style="fill:${C.f1}" d="M-20 172 C60 144 110 150 170 164 S290 136 420 154 V240 H-20Z"/></g>
+  <g class="d2"><path style="fill:${C.f2}" d="M0 200 C70 176 140 174 210 190 S330 174 400 186 V240 H0Z"/></g>
+  <g class="d3"><path style="fill:${C.f3}" d="M0 218 C90 204 170 208 240 214 S350 208 400 212 V240 H0Z"/></g>
+  <g class="ripples" fill="none" style="stroke:${C.lt}" stroke-width="1.2" opacity=".7"><path d="M30 200c30-8 60-9 92-4"/><path d="M220 196c34-7 70-8 110-3"/><path d="M90 188c22-6 46-7 70-3"/><path d="M150 212c26-5 52-5 80-2"/></g>`;
+  return g;
+}
+const DUNES=(id)=>`<svg class="land" viewBox="0 0 400 232" preserveAspectRatio="xMidYMax slice" aria-hidden="true">${scene(THEME(),{C:CSSC,id:id||'sky',sunY:100+sunShift()})}</svg>`;
+function themeLD(th){ if(th==='spice'||!PALETTES[th]) return OCHRE; return PALETTES[th]; }
+function chapterArt(c){
+  const th=THEME(), P=themeLD(th), t=c/7, L=P.light, D=P.dark, night=c>=5;
+  const warm=th==='water'?'#F2B27A':th==='oasis'?'#F0B676':th==='dusk'?'#E8826E':'#E79A62';
+  const k=(key,base)=> c<=4 ? mixc(L[key],base?mixc(L[key],warm,.5):L[key],c/4) : mixc(base?mixc(L[key],warm,.5):L[key],D[key],(c-4)/3);
+  const C={sky1:k('sky1',true),sky2:k('sky2',true),f1:k('dune1'),f2:k('dune2'),f3:k('dune3'),lt:k('ripple'),moon:night?D.moon:'#FFF6E8',sun:'#FFF3DF'};
+  return `<svg viewBox="0 100 400 118" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${scene(th,{C,id:'ch'+c,night,sunY:118+c*6})}</svg>`;
+}
+const chapterInk=c=>c>=5?'#F4EEE6':(themeLD(THEME()).light.ink||'#2B1C10');
+
+/* ---------- звуки палитр ---------- */
+function plip(a,t,f,v){ const o=a.createOscillator(),g=a.createGain(); o.type='sine'; o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*2.3,t+.06);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+.006); g.gain.exponentialRampToValueAtTime(0.0001,t+.14); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.17); }
+function partials(a,t,f,v,d,list){ list.forEach(([m,k])=>{ const o=a.createOscillator(),g=a.createGain(); o.type='sine'; o.frequency.value=f*m; const dd=d/Math.pow(m,.55);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(Math.max(.0002,v*k),t+.006); g.gain.exponentialRampToValueAtTime(0.0001,t+dd); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+dd+.05); }); }
+const mallet=(a,t,f,v,d)=>partials(a,t,f,v,d||.5,[[1,1],[4,.16],[9.2,.04]]);
+const bell=(a,t,f,v,d)=>partials(a,t,f,v,d||1.6,[[1,1],[2.76,.45],[5.4,.2],[8.93,.07]]);
+function knock(a,t,f,v){ const o=a.createOscillator(),g=a.createGain(); o.type='triangle'; o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*.7,t+.05);
+  g.gain.setValueAtTime(v,t); g.gain.exponentialRampToValueAtTime(0.0001,t+.07); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.09);
+  const n=noiseSrc(a),bp=a.createBiquadFilter(),ng=a.createGain(); bp.type='bandpass'; bp.frequency.value=3200; bp.Q.value=2; ng.gain.setValueAtTime(v*.6,t); ng.gain.exponentialRampToValueAtTime(0.0001,t+.025);
+  n.connect(bp); bp.connect(ng); ng.connect(a.destination); n.start(t); n.stop(t+.04); }
+function chirp(a,t,v){ [0,.13,.26].slice(0,2+Math.floor(Math.random()*2)).forEach(d=>{ const o=a.createOscillator(),g=a.createGain(),f=2400+Math.random()*700; o.type='sine';
+  o.frequency.setValueAtTime(f,t+d); o.frequency.exponentialRampToValueAtTime(f*1.45,t+d+.05); o.frequency.exponentialRampToValueAtTime(f*.9,t+d+.1);
+  g.gain.setValueAtTime(0.0001,t+d); g.gain.exponentialRampToValueAtTime(v,t+d+.01); g.gain.exponentialRampToValueAtTime(0.0001,t+d+.11); o.connect(g); g.connect(a.destination); o.start(t+d); o.stop(t+d+.13); }); }
+function swell(a,t,dur,v){ const n=noiseSrc(a),lp=a.createBiquadFilter(),g=a.createGain(); lp.type='lowpass';
+  lp.frequency.setValueAtTime(160,t); lp.frequency.exponentialRampToValueAtTime(2600,t+dur*.45); lp.frequency.exponentialRampToValueAtTime(260,t+dur);
+  env(g,t,dur*.45,v,.1,dur*.5); n.connect(lp); lp.connect(g); g.connect(a.destination); n.start(t); n.stop(t+dur+.2); }
+const PENT=[523,587,659,784,880,1047,1175,1319];
+const TSND={
+  spice:{
+    tap:(a,t,tab)=>{ const o=a.createOscillator(),g=a.createGain(); o.type='sine';
+      o.frequency.setValueAtTime(tab?210:320,t); o.frequency.exponentialRampToValueAtTime(tab?95:170,t+.07);
+      g.gain.setValueAtTime(tab?.16:.07,t); g.gain.exponentialRampToValueAtTime(0.0001,t+.1); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.12);
+      const n=noiseSrc(a),bp=a.createBiquadFilter(),ng=a.createGain(); bp.type='bandpass'; bp.frequency.value=tab?1400:2600; bp.Q.value=1.4;
+      ng.gain.setValueAtTime(tab?.12:.06,t); ng.gain.exponentialRampToValueAtTime(0.0001,t+.035); n.connect(bp); bp.connect(ng); ng.connect(a.destination); n.start(t); n.stop(t+.05); },
+    ok:(a,t,c)=>{ const k=Math.min(c||0,8)*20; tone(660+k,0,.12,'triangle',.11); tone(990+k,.075,.2,'triangle',.1); },
+    bad:()=>{ tone(196,0,.18,'square',.035); tone(147,.11,.28,'sine',.12); }},
+  water:{
+    tap:(a,t,tab)=>plip(a,t,tab?480:900,tab?.13:.07),
+    ok:(a,t,c)=>{ const k=Math.min(c||0,8)*35; plip(a,t,640+k,.14); plip(a,t+.08,980+k,.12); },
+    bad:(a,t)=>{ const o=a.createOscillator(),g=a.createGain(); o.type='sine'; o.frequency.setValueAtTime(320,t); o.frequency.exponentialRampToValueAtTime(110,t+.3);
+      g.gain.setValueAtTime(.14,t); g.gain.exponentialRampToValueAtTime(0.0001,t+.34); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.36); swell(a,t,.5,.08); }},
+  oasis:{
+    tap:(a,t,tab)=>knock(a,t,tab?420:780,tab?.16:.09),
+    ok:(a,t,c)=>{ const i=Math.min(c||0,5); mallet(a,t,PENT[i],.16,.6); mallet(a,t+.09,PENT[i+2],.13,.7); },
+    bad:(a,t)=>{ knock(a,t,190,.18); knock(a,t+.12,150,.16); }},
+  dusk:{
+    tap:(a,t,tab)=>bell(a,t,tab?1175:1760,tab?.06:.035,tab?.6:.4),
+    ok:(a,t,c)=>{ const i=Math.min(c||0,4); bell(a,t,PENT[i+1]*1,.08,1.1); bell(a,t+.1,PENT[i+3],.07,1.2); },
+    bad:(a,t)=>{ bell(a,t,311,.07,.7); bell(a,t+.04,370,.05,.7); }}
+};
+const tsnd=()=>TSND[THEME()]||TSND.spice;
+function themeBlock(a,t){ const th=THEME();
+  if(th==='water'){ [700,880,1050].forEach((f,i)=>plip(a,t+i*.12,f,.13)); swell(a,t+.3,1.6,.12); }
+  else if(th==='oasis'){ [523,659,784,1047].forEach((f,i)=>mallet(a,t+i*.12,f,.15,.9)); }
+  else if(th==='dusk'){ bell(a,t,659,.09,1.8); bell(a,t+.3,880,.08,2); }
+  else { drum(a,t,58,.6); drum(a,t+.42,58,.45); drum(a,t+.84,52,.7); drone(a,t+.8,2.8,[55,82.5],.09); } }
+function themeFinale(a,t){ const th=THEME();
+  if(th==='water'){ swell(a,t,4,.55); swell(a,t+2.2,3.2,.35); const o=a.createOscillator(),g=a.createGain(); o.frequency.value=52; env(g,t,1.6,.25,.6,1.8); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+4.2); }
+  else if(th==='oasis'){ partials(a,t,196,.22,3.6,[[1,1],[2.01,.35],[3.0,.12]]); partials(a,t+.02,294,.12,3.2,[[1,1],[2.4,.2]]); [1.1,1.7,2.5,3.2].forEach(d=>chirp(a,t+d,.035)); }
+  else if(th==='dusk'){ [[523,0],[659,.5],[784,1],[1047,1.6]].forEach(([f,d])=>bell(a,t+d,f,.1,3)); }
+  else quake(a,t); }
+
+/* фон палитры: ветер, прибой, родник с птицами, вечерние сверчки */
+function buildAmbient(a,master){
+  const th=THEME(), parts=[], timers=[];
+  const lfo=(f,depth,target)=>{ const o=a.createOscillator(),g=a.createGain(); o.frequency.value=f; g.gain.value=depth; o.connect(g); g.connect(target); parts.push(o); return o; };
+  if(th==='water'){
+    const n=noiseSrc(a),lp=a.createBiquadFilter(),wg=a.createGain(); lp.type='lowpass'; lp.frequency.value=650; wg.gain.value=.6;
+    lfo(.09,.45,wg.gain); lfo(.09,380,lp.frequency); n.connect(lp); lp.connect(wg); wg.connect(master); parts.push(n);
+    const n2=noiseSrc(a),hp=a.createBiquadFilter(),hg=a.createGain(); hp.type='highpass'; hp.frequency.value=3200; hg.gain.value=.05; lfo(.09,.04,hg.gain); n2.connect(hp); hp.connect(hg); hg.connect(master); parts.push(n2);
+  } else if(th==='oasis'){
+    const n=noiseSrc(a),bp=a.createBiquadFilter(),wg=a.createGain(); bp.type='bandpass'; bp.frequency.value=2300; bp.Q.value=2.6; wg.gain.value=.5;
+    lfo(.7,700,bp.frequency); lfo(3.1,.18,wg.gain); n.connect(bp); bp.connect(wg); wg.connect(master); parts.push(n);
+    const n2=noiseSrc(a),b2=a.createBiquadFilter(),g2=a.createGain(); b2.type='bandpass'; b2.frequency.value=800; g2.gain.value=.25; lfo(.12,.2,g2.gain); n2.connect(b2); b2.connect(g2); g2.connect(master); parts.push(n2);
+    const bird=()=>{ if(!AMB||!S.settings.ambient) return; const v=Math.max(.004,(S.settings.ambVol||0)*.05*(run?.4:1)); chirp(a,a.currentTime+.05,v); AMB&&AMB.timers.push(setTimeout(bird,4000+Math.random()*7000)); };
+    timers.push(setTimeout(bird,2500));
+  } else if(th==='dusk'){
+    const o=a.createOscillator(); o.frequency.value=4300; const g1=a.createGain(); g1.gain.value=0; const g2=a.createGain(); g2.gain.value=0;
+    lfo(26,.5,g1.gain).type='square'; lfo(1.3,.5,g2.gain).type='square';
+    const out=a.createGain(); out.gain.value=.05; o.connect(g1); g1.connect(g2); g2.connect(out); out.connect(master); parts.push(o);
+    [110,164.8,220].forEach((f,i)=>{ const p=a.createOscillator(),pg=a.createGain(); p.frequency.value=f; p.detune.value=i*5; pg.gain.value=.05; p.connect(pg); pg.connect(master); parts.push(p); });
+  } else {
+    const n=noiseSrc(a),bp=a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=520; bp.Q.value=.8;
+    lfo(.06,320,bp.frequency); const wg=a.createGain(); wg.gain.value=.55; lfo(.11,.3,wg.gain);
+    n.connect(bp); bp.connect(wg); wg.connect(master); parts.push(n);
+    const n2=noiseSrc(a),lp=a.createBiquadFilter(),lg=a.createGain(); lp.type='lowpass'; lp.frequency.value=110; lg.gain.value=.5; n2.connect(lp); lp.connect(lg); lg.connect(master); parts.push(n2);
+  }
+  parts.forEach(p=>{ try{ p.start(); }catch(e){} });
+  return {parts,timers};
+}
+
+/* ---------- анимированные разборы ---------- */
+const WD=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+function wheel(start,steps,sub){
+  const pts=WD.map((d,i)=>{ const an=(-90+i*360/7)*Math.PI/180; return [80+Math.cos(an)*58,80+Math.sin(an)*58,d]; });
+  return `<div class="wheelbox"><svg class="wheel" viewBox="0 0 160 160" data-start="${start}" data-steps="${steps}">
+    <circle cx="80" cy="80" r="70" class="wr"/>${pts.map(([x,y,d],i)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="15" class="wd" data-i="${i}"/><text x="${x.toFixed(1)}" y="${(y+4.5).toFixed(1)}" class="wt" data-i="${i}">${d}</text>`).join('')}
+    <g class="hand" style="transform:rotate(${start*360/7}deg)"><line x1="80" y1="80" x2="80" y2="36"/><circle cx="80" cy="80" r="5"/></g></svg>${sub?`<div class="wsub">${sub}</div>`:''}</div>`;
+}
+function spinWheel(st){
+  const w=st.querySelector('.wheel'); if(!w) return;
+  const s=+w.dataset.start, n=+w.dataset.steps, hand=w.querySelector('.hand'), end=(s+n)%7;
+  const mark=i=>{ w.querySelectorAll('.wd').forEach(c=>c.classList.toggle('on',+c.dataset.i===i)); };
+  mark(s);
+  if(!n) return;
+  const dur=Math.min(2.6,.35+n*.11);
+  setTimeout(()=>{ hand.style.transition=`transform ${dur}s cubic-bezier(.3,.1,.2,1)`; hand.style.transform=`rotate(${(s+n)*360/7}deg)`; },350);
+  setTimeout(()=>mark(end),350+dur*1000);
+}
+const HL=s=>`<b class="h1">${s}</b>`, HG=s=>`<b class="h2">${s}</b>`;
+function mulGrid(hl,lines){
+  const d=(v,k)=>`<span class="${hl.includes(k)?'on':''}">${v}</span>`;
+  return `<div class="mg"><div>${d(4,'a')}${d(3,'b')}</div><div class="x">×</div><div>${d(2,'c')}${d(7,'d')}</div>${lines?`<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="mgx"><line x1="22" y1="22" x2="78" y2="80"/><line x1="78" y1="22" x2="22" y2="80"/></svg>`:''}</div>`;
+}
+const DEMOS={
+  add:[{h:`<div class="dq">4 738 + 2 586</div>`,n:'Складываем слева направо'},
+       {h:`<div class="dq">4 738 + ${HL('2 000')}</div><div class="dr">= 6 738</div>`,n:'Сначала тысячи'},
+       {h:`<div class="dq">6 738 + ${HL('500')}</div><div class="dr">= 7 238</div>`,n:'Потом сотни'},
+       {h:`<div class="dq">7 238 + ${HL('80')}</div><div class="dr">= 7 318</div>`,n:'Десятки'},
+       {h:`<div class="dq">7 318 + ${HL('6')}</div><div class="dr">= ${HG('7 324')}</div>`,n:'Единицы. Готово!'}],
+  sub:[{h:`<div class="dq">1 000 − 387</div>`,n:'Вычитаем из круглого числа'},
+       {h:`<div class="cols"><div>${HL('3')}<small>до 9</small><b class="h2">6</b></div><div>8<small></small><b class="ghost">·</b></div><div>7<small></small><b class="ghost">·</b></div></div>`,n:'Каждую цифру дополняем до 9'},
+       {h:`<div class="cols"><div>3<small>до 9</small><b class="h2">6</b></div><div>${HL('8')}<small>до 9</small><b class="h2">1</b></div><div>7<small></small><b class="ghost">·</b></div></div>`,n:'Следующую тоже до 9'},
+       {h:`<div class="cols"><div>3<small>до 9</small><b class="h2">6</b></div><div>8<small>до 9</small><b class="h2">1</b></div><div>${HL('7')}<small>до 10</small><b class="h2">3</b></div></div>`,n:'А последнюю — до 10'},
+       {h:`<div class="dq">1 000 − 387 = ${HG('613')}</div>`,n:'Готово!'}],
+  mul:[{h:mulGrid([],false),n:'43 × 27 «крестом»'},
+       {h:mulGrid(['a','c'],false)+`<div class="dr">4 × 2 = 8 → ${HL('800')}</div>`,n:'Десятки × десятки'},
+       {h:mulGrid(['a','b','c','d'],true)+`<div class="dr">4×7 + 3×2 = 34 → ${HL('340')}</div>`,n:'Крест: перемножь накрест и сложи'},
+       {h:mulGrid(['b','d'],false)+`<div class="dr">3 × 7 = ${HL('21')}</div>`,n:'Единицы × единицы'},
+       {h:`<div class="dq">800 + 340 + 21</div><div class="dr">= ${HG('1 161')}</div>`,n:'Сложи три части'}],
+  sq:[{h:`<div class="dq big">65²</div>`,n:'Число на 5 — есть приём'},
+      {h:`<div class="dq big">${HL('6')}5²</div>`,n:'Возьми десятки: 6'},
+      {h:`<div class="dq">6 × ${HL('7')} = 42</div>`,n:'Умножь на следующее число'},
+      {h:`<div class="dq big">42${HL('25')}</div>`,n:'Припиши 25'},
+      {h:`<div class="dq big">65² = ${HG('4 225')}</div>`,n:'Готово!'},
+      {h:`<div class="dq big">47²</div>`,n:'Другое число? Шагни до круглого'},
+      {h:`<div class="dq">47 ${HL('− 3')} = 44<br>47 ${HL('+ 3')} = 50</div>`,n:'Отступи на 3 в обе стороны'},
+      {h:`<div class="dq">44 × 50 = 2 200</div>`,n:'Перемножь — это легко'},
+      {h:`<div class="dq">2 200 + ${HL('3²')}</div><div class="dr">= ${HG('2 209')}</div>`,n:'Добавь квадрат шага'}],
+  approx:[{h:`<div class="dq">37% от 840</div>`,n:'Собираем процент из кусков'},
+          {h:`<div class="dq">10% = 84<br>${HL('30%')} = 252</div>`,n:'10% — сдвинь запятую'},
+          {h:`<div class="dq">1% = 8,4<br>${HL('7%')} = 58,8</div>`,n:'1% — сдвинь ещё раз'},
+          {h:`<div class="dq">252 + 58,8</div><div class="dr">= ${HG('310,8')}</div>`,n:'Сложи куски'},
+          {h:`<div class="dq">√50 ≈ ?</div>`,n:'Корень: ищи ближайший квадрат'},
+          {h:`<div class="dq">${HL('49')} = 7²</div><div class="dr">50 − 49 = 1</div>`,n:'49 рядом с 50'},
+          {h:`<div class="dq">7 + 1 : ${HL('14')}</div><div class="dr">≈ ${HG('7,07')}</div>`,n:'Разницу дели на 2 × 7'}],
+  dow:[{h:`<div class="dq">31 октября 2026</div>`,n:'Какой это день недели?'},
+       {h:`<div class="chiprow">${['4.04','6.06','8.08','10.10','12.12'].map(x=>`<span class="${x==='10.10'?'on':''}">${x}</span>`).join('')}</div><div class="dr">в 2026 году — суббота</div>`,n:'Якорные даты: всегда один день'},
+       {h:wheel(5,0,'10 октября — суббота'),n:'Берём якорь месяца',fx:spinWheel},
+       {h:`<div class="dq">31 − 10 = ${HL('21')}</div>`,n:'Дней от якоря'},
+       {h:wheel(5,21,'21 день = 3 круга'),n:'Полные недели день не меняют',fx:spinWheel,t:3800},
+       {h:`<div class="dq big">${HG('Суббота')}</div>`,n:'Готово!'},
+       {h:`<div class="dq">15 ноября 2026</div><div class="dr">якорь ноября — 7.11, суббота</div>`,n:'Ещё пример'},
+       {h:wheel(5,8,'15 − 7 = 8 = неделя + 1'),n:'Круг и ещё шаг',fx:spinWheel,t:3800},
+       {h:`<div class="dq big">${HG('Воскресенье')}</div>`,n:'Готово!'}],
+  flash:[{h:`<div class="flashd">7</div><div class="dr">сумма: 7</div>`,n:'Числа вспыхивают по одному',t:1300},
+         {h:`<div class="flashd">4</div><div class="dr">сумма: ${HL('11')}</div>`,n:'Сразу прибавляй',t:1300},
+         {h:`<div class="flashd">9</div><div class="dr">сумма: ${HL('20')}</div>`,n:'Держи только сумму',t:1300},
+         {h:`<div class="flashd">3</div><div class="dr">сумма: ${HL('23')}</div>`,n:'Не повторяй числа',t:1300},
+         {h:`<div class="dq big">${HG('23')}</div>`,n:'Ответ готов'}],
+  recall:[{h:`<div class="dq">25 73 90</div>`,n:'Запомни 6 цифр'},
+          {h:`<div class="dq">25 → Д·Б → ${HL('ДуБ')}</div><div class="emo">🌳</div>`,n:'Цифра = согласная, пара = слово'},
+          {h:`<div class="dq">73 → С·К → ${HL('СоК')}</div><div class="emo">🧃</div>`,n:'2 — Д, 5 — Б, 7 — С, 3 — К'},
+          {h:`<div class="dq">90 → Р·М → ${HL('РоМашка')}</div><div class="emo">🌼</div>`,n:'9 — Р, 0 — М'},
+          {h:`<div class="rooms"><div>🚪<small>дверь</small><b>🌳</b></div><div>🍳<small>кухня</small><b>🧃</b></div><div>🛁<small>ванная</small><b>🌼</b></div></div>`,n:'Расставь образы по квартире'}],
+  span:[{h:`<div class="dq">7 2 9 4 1</div>`,n:'Запомни ряд'},
+        {h:`<div class="dq">${HL('729')} · ${HL('41')}</div>`,n:'Группами по три'},
+        {h:`<div class="dq">41 → ${HG('14')}<br>729 → ${HG('927')}</div>`,n:'Читай группы с конца'},
+        {h:`<div class="dq">${HG('1 4 9 2 7')}</div>`,n:'Готово!'}],
+  kim:[{h:`<div class="emo4">🔑 🍋 🦉 🔔</div>`,n:'Сначала посчитай: 4 предмета'},
+       {h:`<div class="emo4">🦉 → 🔑 → 🔔 → 🍋</div>`,n:'Свяжи в историю'},
+       {h:`<div class="dr">Сова открыла ключом дверь,<br>зазвенел колокольчик,<br>на полу — лимон</div>`,n:'Историю помнить легче'},
+       {h:`<div class="emo4"><span class="pk">🦉</span> <span class="pk">🔑</span> 🌵 <span class="pk">🔔</span> 🎲 <span class="pk">🍋</span></div>`,n:'Отмечай только уверенно'}]
+};
+function demoHTML(id,compact){ return DEMOS[id]?`<div class="demo ${compact?'compact':''}" data-demo="${id}"><div class="dstage" data-a="demonext"></div><div class="dnote"></div><div class="dctl"><span class="ddots">${DEMOS[id].map(()=>'<i></i>').join('')}</span><button class="dbtn" data-a="demoreplay">↻ Сначала</button></div></div>`:''; }
+function playDemo(el,i){
+  const fr=DEMOS[el.dataset.demo]; if(!fr||!el.isConnected) return;
+  clearTimeout(el._t); el.dataset.on='1'; el.dataset.i=i;
+  const f=fr[i], st=el.querySelector('.dstage');
+  st.innerHTML=`<div class="dframe">${f.h}</div>`; el.querySelector('.dnote').textContent=f.n;
+  el.querySelectorAll('.ddots i').forEach((d,k)=>d.classList.toggle('on',k<=i));
+  if(f.fx) f.fx(st);
+  if(i<fr.length-1) el._t=setTimeout(()=>playDemo(el,i+1),f.t||2300);
+}
+function runDemos(){ document.querySelectorAll('.demo:not([data-on])').forEach(el=>playDemo(el,0)); }
+const SHORT={
+  add:['Складывай слева направо','Держи в голове одну сумму','Близко к круглому — прибавь его и поправь'],
+  sub:['Из 100 и 1000: каждую цифру до 9, последнюю до 10','Или досчитай, как сдачу','Вычитаемое около круглого — сдвинь оба числа'],
+  mul:['Раскладывай: 47×8 = 40×8 + 7×8','Двузначные — «крестом»','Около круглого: умножь на круглое и вычти'],
+  sq:['На 5: десятки × следующее, припиши 25','Иначе шагни до круглого: (a−b)(a+b) + b²','Квадраты до 25 — выучи'],
+  approx:['Проценты собирай из 10% и 1%','Корень: ближайший квадрат + поправка','Смотри на допуск, лишняя точность не нужна'],
+  dow:['Найди якорную дату месяца',`Якорь ${CY} года — ${DOWF[ANCHOR_I]}`,'Отсчитай разницу, полные недели выкинь'],
+  flash:['Держи в голове только сумму','Прибавляй, пока число на экране','Сбился — продолжай с той суммой, что есть'],
+  recall:['Пара цифр → слово по согласным','Слово → яркий образ','Образы — по комнатам своей квартиры'],
+  span:['Запоминай группами по три','Представь цифры строкой','Читай строку справа налево'],
+  kim:['Сначала посчитай предметы','Свяжи их в короткую историю','Отмечай только то, в чём уверен']
+};
+function shortHTML(id){ return SHORT[id]?`<ol class="short">${SHORT[id].map(x=>`<li>${x}</li>`).join('')}</ol>`:''; }
 
 /* ---------- графики ---------- */
 function niceMax(v){ if(v<=0) return 1; const p=10**Math.floor(Math.log10(v)),n=v/p; return (n<=1?1:n<=2?2:n<=5?5:10)*p; }
@@ -1054,21 +1449,10 @@ function render(){
   $('#view').innerHTML= tab==='home'?homeHTML(): tab==='path'?pathHTML(): tab==='theory'?(openArt?articleHTML(openArt):theoryListHTML()): tab==='settings'?settingsHTML(): progHTML();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.tab===tab)));
   window.scrollTo(0,0);
+  setTimeout(runDemos,40);
 }
 
-const DUNES=()=>`<svg class="land" viewBox="0 0 400 232" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky1)"/><stop offset="1" style="stop-color:var(--sky2)"/></linearGradient></defs>
-  <rect width="400" height="232" fill="url(#sky)"/>
-  <g class="stars-sky" style="fill:var(--moon)"><circle class="tw" cx="40" cy="30" r="1.2"/><circle class="tw" cx="96" cy="58" r="1"/><circle class="tw" cx="150" cy="22" r="1.4"/><circle class="tw" cx="214" cy="48" r="1"/><circle class="tw" cx="262" cy="18" r="1.2"/><circle class="tw" cx="190" cy="96" r=".9"/><circle class="tw" cx="120" cy="112" r="1.1"/><circle class="tw" cx="292" cy="126" r="1"/><circle class="tw" cx="70" cy="140" r=".9"/><circle class="tw" cx="384" cy="40" r="1"/><circle class="tw" cx="236" cy="132" r=".8"/><circle class="tw" cx="18" cy="96" r="1"/>
-    <path class="shoot" d="M300 20 l14 -6" style="stroke:var(--moon)" stroke-width="1.4" stroke-linecap="round"/><path class="shoot s2" d="M200 30 l14 -6" style="stroke:var(--moon)" stroke-width="1.2" stroke-linecap="round"/></g>
-  <g class="sun"><g transform="translate(0 ${sunShift()})"><circle class="glow" cx="296" cy="100" r="46" style="fill:var(--sun-c,var(--moon))"/><circle cx="296" cy="100" r="30" style="fill:var(--sun-c,var(--moon))"/></g></g>
-  <g class="moons"><circle cx="326" cy="98" r="22" style="fill:var(--moon)" opacity=".92"/><circle cx="366" cy="128" r="8" style="fill:var(--moon)" opacity=".75"/></g>
-  <g class="mirage-w"><ellipse class="mirage" cx="200" cy="160" rx="230" ry="7" style="fill:var(--sky2)"/></g>
-  <g class="drift"><path class="d1" style="fill:var(--dune1)" d="M-20 172 C60 144 110 150 170 164 S290 136 420 154 V232 H-20Z"/></g>
-  <path class="d2" style="fill:var(--dune2)" d="M0 200 C70 176 140 174 210 190 S330 174 400 186 V232 H0Z"/>
-  <path class="d3" style="fill:var(--dune3)" d="M0 218 C90 204 170 208 240 214 S350 208 400 212 V232 H0Z"/>
-  <g class="ripples" fill="none" style="stroke:var(--ripple)" stroke-width="1.2" opacity=".7"><path d="M30 200c30-8 60-9 92-4"/><path d="M220 196c34-7 70-8 110-3"/><path d="M90 188c22-6 46-7 70-3"/><path d="M150 212c26-5 52-5 80-2"/></g>
-</svg>`;
+
 const DROP='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3 4.5 7 8.6 7 12.6A7 7 0 0 1 5 14.6C5 10.6 9 6.5 12 2z"/></svg>';
 
 function weakList(){
@@ -1226,10 +1610,13 @@ function showIntro(){
     ${n>1?`<div class="step">Блок ${run.idx+1} из ${n}</div>`:''}
     <div class="dhead"><span class="glyph">${m.glyph}</span><h1>${m.name}</h1></div>
     <p class="lvlabel">Уровень ${l} из ${m.levels.length}: ${m.levels[l-1].label}. ${b.sec/60} мин.</p>
-    <p class="tip">${m.tip}</p>
+    ${DEMOS[b.id]?(((S.demoSeen||{})[b.id]||0)<3?demoHTML(b.id,true):`<button class="pill" data-a="showdemo" data-id="${b.id}">Как решать ▸</button><div id="demoslot"></div>`):''}
+    ${SHORT[b.id]?shortHTML(b.id):`<p class="tip">${m.tip}</p>`}
     <button class="primary" data-a="go">Начать блок</button>
     <button class="ghost" data-a="quit">Завершить тренировку</button></div>`;
   window.scrollTo(0,0);
+  if(DEMOS[b.id]&&((S.demoSeen||{})[b.id]||0)<3){ S.demoSeen=S.demoSeen||{}; S.demoSeen[b.id]=(S.demoSeen[b.id]||0)+1; save(); }
+  setTimeout(runDemos,40);
 }
 
 function startBlock(){
@@ -1374,8 +1761,10 @@ function sandAway(els){
       const g=document.createElement('i'); g.className='sgrain'+(i%4===0?' sp':''); const sz=(1.5+Math.random()*2.8).toFixed(1); g.style.width=sz+'px'; g.style.height=sz+'px';
       const fx=Math.random(), x=r.left+fx*r.width, y=r.top+r.height*(.15+Math.random()*.7);
       g.style.left=x+'px'; g.style.top=y+'px';
-      g.style.setProperty('--dx',(40+Math.random()*170).toFixed(0)+'px');
-      g.style.setProperty('--dy',(-30+Math.random()*44).toFixed(0)+'px');
+      const th=THEME();
+      const dx=th==='water'?(-30+Math.random()*60):th==='dusk'?(10+Math.random()*90):(40+Math.random()*170);
+      const dy=th==='water'?(-70-Math.random()*110):th==='dusk'?(-50-Math.random()*90):th==='oasis'?(-10+Math.random()*70):(-30+Math.random()*44);
+      g.style.setProperty('--dx',dx.toFixed(0)+'px'); g.style.setProperty('--dy',dy.toFixed(0)+'px');
       g.style.animationDelay=(fx*300).toFixed(0)+'ms';
       document.body.appendChild(g); setTimeout(()=>g.remove(),1200);
     }
@@ -1770,7 +2159,7 @@ function widgetData(){
   const cs=getComputedStyle(document.documentElement), g=n=>cs.getPropertyValue('--'+n).trim();
   const since=Date.now()-400*86400000;
   const days=[...new Set(S.blocks.filter(b=>b.t>=since).map(b=>isoDay(b.t)))];
-  return JSON.stringify({days,best:bestStreak(),dark:isDark(),
+  return JSON.stringify({days,best:bestStreak(),dark:isDark(),theme:THEME(),
     colors:{sky1:g('sky1'),sky2:g('sky2'),dune1:g('dune1'),dune2:g('dune2'),dune3:g('dune3'),moon:g('moon'),ink:g('ink'),muted:g('muted'),surface:g('surface'),spice:g('spice'),spiceInk:g('spice-ink')}});
 }
 function syncNative(){ try{ if(hasNative('markTrained')) MentatNative.markTrained(isoDay(),streak(),trainedOn(new Date()),!!dailyToday()); if(hasNative('updateWidget')) MentatNative.updateWidget(widgetData()); }catch(e){} }
@@ -1790,16 +2179,15 @@ function remindAskHTML(){
 
 /* ---------- приветствие ---------- */
 const WSLIDES=[
-  ()=>`<h1>Приветствуем тебя, будущий нумен</h1><p>Тебя ждёт увлекательный и долгий путь. Шаг за шагом ты научишься считать в уме быстрее, запоминать больше и замечать то, что ускользает от других.</p>`,
-  ()=>`<h1>Вот что тебя ждёт</h1><ul class="wlist">
-     <li><span class="glyph">×</span><div><b>Счёт</b><span>Сложение, умножение, квадраты, прикидка и флеш-счёт</span></div></li>
-     <li><span class="glyph">07</span><div><b>Память</b><span>Длинные ряды цифр через образы и дворец памяти</span></div></li>
-     <li><span class="glyph">◎</span><div><b>Наблюдение</b><span>Игра Кима и день недели для любой даты</span></div></li></ul>`,
-  ()=>`<h1>Путь нумена</h1><p>${STAGES.length} ступеней в ${CHAPTERS.length} главах, от первых шагов до вершины. За каждую ступень до трёх звёзд. В конце каждой главы ждёт испытание.</p>
-     <p>По мере роста навыков ты пройдёшь восемь рангов, от новичка до великого нумена.</p><div class="wemb">${RANKS.map((_,i)=>emblem(i)).join('')}</div>`,
-  ()=>`<h1>Каждый день понемногу</h1><p>Пятнадцать минут в день дают больше, чем час раз в неделю. Каждый день с тренировкой добавляет огонёк в серию. Пропустишь день, и серия сгорит.</p>
-     <p>Подробные методики с примерами ждут во вкладке «Теория». Загляни туда, если застрянешь на уровне.</p>`
+  ()=>`<h1>Привет, будущий нумен</h1><p>Счёт, память и внимание. По 15 минут в день.</p>`,
+  ()=>`<h1>Решай на время</h1><p>Верно — пример сдувает, и сразу следующий.</p>`,
+  ()=>`<h1>Иди по пути</h1><p>${STAGES.length} ступеней. Звёзды за точность, сложность растёт сама.</p>`,
+  ()=>`<h1>Каждый день — огонёк</h1><p>Тренируйся каждый день, и серия растёт. Пропустишь — сгорит.</p>`
 ];
+const WART=[null,
+  ()=>`<div class="wanim"><div class="wcard"><div class="wq">47 × 8</div><div class="wa"><span>3</span><span>7</span><span>6</span></div><div class="wok">Верно!</div>${'<i></i>'.repeat(14)}</div></div>`,
+  ()=>`<div class="wanim"><div class="wpath">${[0,1,2,3].map(i=>`<div class="wn n${i}" style="--i:${i}"><b>${['+−','×','07','◈'][i]}</b><span>★★★</span></div>`).join('')}</div></div>`,
+  ()=>`<div class="wanim"><div class="wweek">${['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].map((d,i)=>`<div style="--i:${i}"><i>${DROP}</i><span>${d}</span></div>`).join('')}</div><div class="wstreak">Серия: <b class="wnum"></b></div></div>`];
 let wIdx=0;
 function showWelcome(){
   wIdx=0; document.body.classList.add('welcoming'); let d=$('#welcome'); if(!d){ d=document.createElement('div'); d.id='welcome'; d.className='welcome'; document.body.appendChild(d); }
@@ -1807,7 +2195,7 @@ function showWelcome(){
 }
 function drawWelcome(){
   const d=$('#welcome'); if(!d) return; const last=wIdx===WSLIDES.length-1;
-  d.innerHTML=`<div class="art hero" style="${skyStyle()}">${DUNES()}</div>
+  d.innerHTML=`<div class="art hero" style="${skyStyle()}">${DUNES('wsky')}${WART[wIdx]?WART[wIdx]():''}</div>
     <div class="body">${WSLIDES[wIdx]()}</div>
     <div class="foot"><div class="wdots">${WSLIDES.map((_,i)=>`<i class="${i===wIdx?'on':''}"></i>`).join('')}</div>
       ${last?`<button class="primary" data-w="tour">Покажи, что где</button><button class="ghost" data-w="done">Сразу к пути</button>`
@@ -1822,14 +2210,11 @@ function endWelcome(go){
 
 /* ---------- экскурсия ---------- */
 const TOUR=[
-  {sel:'.rankrow',t:'Твой ранг',d:'Растёт, когда поднимаются уровни всех навыков. Полоска под ним показывает, сколько осталось до следующего ранга.'},
-  {sel:'.streakcard',t:'Серия дней',d:'Каждый день с тренировкой добавляет огонёк. Пропуск целого дня сжигает серию.'},
-  {sel:'[data-a=start]',t:'Тренировка дня',d:'Общая тренировка из нескольких блоков. Уровень каждого навыка сам подстраивается под тебя. Нажми на отдельный блок, чтобы потренировать только его.'},
-  {sel:'[data-a=daynight]',t:'День и ночь',d:'Переключает оформление одним нажатием.'},
-  {sel:'.tabs [data-tab=path]',t:'Путь нумена',d:'Ступени по возрастанию сложности с оценкой звёздами. Лучше всего начинать отсюда.'},
-  {sel:'.tabs [data-tab=theory]',t:'Теория',d:'Все навыки, их уровни и подробные методики с разобранными примерами.'},
-  {sel:'.tabs [data-tab=prog]',t:'Прогресс',d:'Графики, рекорды, календарь занятий и лестница рангов.'},
-  {sel:'.tabs [data-tab=settings]',t:'Настройки',d:'Тема, цвет, звуки, ветер пустыни. Отсюда же можно пройти экскурсию снова.'}];
+  {sel:'[data-a=start]',t:'Тренировка дня',d:'Жми — и вперёд. Сложность подстроится сама.'},
+  {sel:'.tabs [data-tab=path]',t:'Путь',d:'Ступени и звёзды. Начни отсюда.'},
+  {sel:'.tabs [data-tab=theory]',t:'Теория',d:'Как решать — с анимацией.'},
+  {sel:'.tabs [data-tab=prog]',t:'Прогресс',d:'Графики, рекорды, ранги.'},
+  {sel:'.tabs [data-tab=settings]',t:'Настройки',d:'Палитра, звуки, напоминания.'}];
 let tIdx=0;
 function startTour(){ tab='home'; render(); tIdx=0; let d=$('#tour'); if(!d){ d=document.createElement('div'); d.id='tour'; d.className='tour'; d.innerHTML='<div class="spot"></div><div class="tip"></div>'; document.body.appendChild(d);} drawTour(); }
 function drawTour(){
@@ -1842,7 +2227,7 @@ function drawTour(){
     const r=el.getBoundingClientRect(), pad=6, sp=d.querySelector('.spot'), tip=d.querySelector('.tip');
     Object.assign(sp.style,{left:(r.left-pad)+'px',top:(r.top-pad)+'px',width:(r.width+pad*2)+'px',height:(r.height+pad*2)+'px'});
     const last=tIdx===TOUR.length-1;
-    tip.innerHTML=`<b>${step.t}</b><p>${step.d}</p><div class="row"><button class="ghost" data-tour="skip">${last?'':'Пропустить'}</button><span class="muted small">${tIdx+1} из ${TOUR.length}</span><button class="primary" data-tour="next">${last?'Готово':'Дальше'}</button></div>`;
+    tip.innerHTML=`<div class="tstep">${tIdx+1}</div><b>${step.t}</b><p>${step.d}</p><div class="row"><button class="ghost" data-tour="skip">${last?'':'Пропустить'}</button><span class="muted small">${tIdx+1} из ${TOUR.length}</span><button class="primary" data-tour="next">${last?'Готово':'Дальше'}</button></div>`;
     const below=r.top<innerHeight*.5;
     tip.style.top=below?(r.bottom+pad+12)+'px':''; tip.style.bottom=below?'':(innerHeight-r.top+pad+12)+'px';
   },el.closest('.tabs')?10:260);
@@ -1869,6 +2254,7 @@ window.mentatBack=function(){
 /* ---------- события ---------- */
 document.addEventListener('click',e=>{
   if(!AMB&&S.settings.ambient) startAmbient();
+  const ds=e.target.closest('.dstage'); if(ds){ const el=ds.closest('.demo'); if(el){ const i=+el.dataset.i||0, n=DEMOS[el.dataset.demo].length; tapSound('btn'); playDemo(el,i+1<n?i+1:0); } return; }
   const t=e.target.closest('button'); if(!t) return;
   const d=t.dataset;
   tapSound(d.tab?'tab':'btn'); if(d.tab) buzz(12);
@@ -1880,7 +2266,7 @@ document.addEventListener('click',e=>{
   if(d.tab){ if(d.tab==='settings') prevTab=tab; tab=d.tab; if(tab!=='mods') openSkill=null; if(tab!=='theory') openArt=null; render(); return; }
   if(d.art){ tab='theory'; openArt=d.art; render(); return; }
   if(d.themeSet){ S.settings.theme=d.themeSet; save(); applyLook(); const y=window.scrollY; render(); window.scrollTo(0,y); return; }
-  if(d.accent){ S.settings.accent=d.accent; save(); applyLook(); const y=window.scrollY; render(); window.scrollTo(0,y); return; }
+  if(d.accent){ S.settings.accent=d.accent; save(); applyLook(); restartAmbient(); const y=window.scrollY; render(); window.scrollTo(0,y); return; }
   if(d.k!==undefined){ press(d.k); return; }
   if(d.dow!==undefined){ answerDow(d.dow==='skip'?-1:+d.dow); return; }
   if(d.kim!==undefined){ toggleKim(+d.kim,t); return; }
@@ -1909,6 +2295,9 @@ document.addEventListener('click',e=>{
     case 'closesheet': { const sh=$('#sheet'); if(sh) sh.remove(); } break;
     case 'topath': run=null; tab='path'; render(); break;
     case 'tour': startTour(); break;
+    case 'demoreplay': { const el=t.closest('.demo'); if(el) playDemo(el,0); } break;
+    case 'demonext': { const el=t.closest('.demo'); if(el){ const i=+el.dataset.i||0, n=DEMOS[el.dataset.demo].length; playDemo(el,i+1<n?i+1:0); } } break;
+    case 'showdemo': { const sl=$('#demoslot'); if(sl){ sl.innerHTML=demoHTML(d.id,true); t.remove(); runDemos(); } } break;
     case 'daily': startDaily(); break;
     case 'sharedaily': shareDaily(); break;
     case 'remyes': S.remindAsked=true; S.settings.remind=true; S.settings.remTime=S.settings.remTime||'19:00'; save(); applyReminder(); render(); break;
